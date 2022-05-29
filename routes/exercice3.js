@@ -7,6 +7,13 @@ router.get(
   "/:sector/:city",
   EtablissementCtrl.findEtablissementBySectorAndCity
 );
-//router.get("/typeincity/:id", EtablissementCtrl);
+router.delete(
+  "/delete/city/id:",
+  EtablissementCtrl.deleteAllEtablissementInCity
+);
+router.delete(
+  "/delete/sector/:id",
+  EtablissementCtrl.deleteAllEtablissementPerType
+);
 
 module.exports = router;
