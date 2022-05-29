@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const dataRoutes = require("./routes/exercice2");
-const commerceRoutes = require("./routes/exercice1");
+const dataRoutes = require("./routes/exercice1");
+const commerceRoutes = require("./routes/exercice2");
 const etablissementRoutes = require("./routes/exercice3");
 
 app.use((req, res, next) => {
