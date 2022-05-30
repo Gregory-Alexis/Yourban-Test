@@ -7,11 +7,9 @@ exports.findCommerceByActivity = (req, res) => {
 
   // Récupère la somme de tous les commerces d’un secteur d’activité donné
   try {
-    const findCommerceByActivity = data.filter(
-      (data) => data.etablissement_type.toLowerCase() === id
-    );
+    data = data.filter((data) => data.etablissement_type.toLowerCase() === id);
 
-    res.status(200).json(findCommerceByActivity.length);
+    res.status(200).json(data.length);
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -22,11 +20,9 @@ exports.findCommerceByCity = (req, res) => {
 
   // Récupère la somme de tous les commerces d’une ville donnée
   try {
-    const findCommerceByCity = data.filter(
-      (data) => data.location.toLowerCase() === id
-    );
+    data = data.filter((data) => data.location.toLowerCase() === id);
     // le récupère le nombre de commerce dans une ville donnée
-    res.status(200).json(findCommerceByCity.length);
+    res.status(200).json(data.length);
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -36,7 +32,7 @@ exports.findCommerceActivityInCity = (req, res) => {
   // Récupère la somme de tous les commerces d’un secteur d’activité dans une ville donnée
   const { sector, city } = req.params;
   try {
-    const newData = data
+    data = data
       .filter((data) => {
         if (
           data.etablissement_type.toLowerCase() === sector.toLowerCase() &&
@@ -47,7 +43,7 @@ exports.findCommerceActivityInCity = (req, res) => {
       })
       .map((data) => data);
 
-    res.status(200).json(newData.length);
+    res.status(200).json(data.length);
   } catch (error) {
     res.status(400).json({ error });
   }
