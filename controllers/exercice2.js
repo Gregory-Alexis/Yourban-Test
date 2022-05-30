@@ -13,7 +13,7 @@ exports.findCommerceByActivity = (req, res) => {
     // le récupère le nombre de type de commerce dans un secteur d'activité
     res.status(200).json(findCommerceByActivity.length);
   } catch (error) {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({ error });
   }
 };
 
@@ -28,17 +28,26 @@ exports.findCommerceByCity = (req, res) => {
     // le récupère le nombre de commerce dans une ville donnée
     res.status(200).json(findCommerceByCity.length);
   } catch (error) {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({ error });
   }
 };
 
-/*exports.findCommerceActivityInCity = (req, res) => {
-  const { id } = req.params;
+exports.findCommerceActivityInCity = (req, res) => {
+  const { sector, city } = req.params;
+  try {
+    const newData = data
+      .filter((data) => {
+        if (
+          data.etablissement_type.toLowerCase() === sector.toLowerCase() &&
+          data.location.toLowerCase() === city.toLowerCase()
+        ) {
+          return data.etablissement_type;
+        }
+      })
+      .map((data) => data);
 
-  // Récupère les donnée des établissement par ville
-  const findCommerceActivityInCity = data.filter(
-    (data) => id && data.etablissement_type.toLowerCase().includes(id)
-  );
-
-  res.send(findCommerceActivityInCity);
-};*/
+    res.status(200).json(newData.length);
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};
