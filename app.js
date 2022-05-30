@@ -19,7 +19,6 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/data", dataRoutes);
 app.use("/commerce", commerceRoutes);
