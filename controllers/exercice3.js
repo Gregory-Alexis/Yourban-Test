@@ -6,14 +6,14 @@ exports.findByCity = (req, res) => {
   const { id } = req.params;
   // Récupère les donnée des établissement par ville
   try {
-    data = data
+    const newData = data
       .filter((data) => {
         if (data.location.toLocaleLowerCase() === id) {
           return data;
         }
       })
       .map((data) => data.etablissement);
-    res.status(200).json(data);
+    res.status(200).json(newData);
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -23,7 +23,7 @@ exports.findBySectorAndCity = (req, res) => {
   // Récupère les donnée des établissement par secteur et ville
   const { sector, city } = req.params;
   try {
-    data = data
+    const newData = data
       .filter((data) => {
         if (
           data.etablissement_type.toLowerCase() === sector.toLowerCase() &&
@@ -34,7 +34,7 @@ exports.findBySectorAndCity = (req, res) => {
       })
       .map((data) => data);
 
-    res.status(200).json(data);
+    res.status(200).json(newData);
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -45,8 +45,8 @@ exports.findBySectorAndCity = (req, res) => {
 exports.deleteAllInCity = (req, res) => {
   const { id } = req.params;
   try {
-    data = data.filter((data) => data.location !== id);
-    res.status(200).json(data);
+    const newData = data.filter((data) => data.location !== id);
+    res.status(200).json(newData);
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -55,8 +55,8 @@ exports.deleteAllInCity = (req, res) => {
 exports.deleteAllPerType = (req, res) => {
   const { id } = req.params;
   try {
-    data = data.filter((data) => data.etablissement_type !== id);
-    res.status(200).json(data);
+    const newData = data.filter((data) => data.etablissement_type !== id);
+    res.status(200).json(newData);
   } catch (error) {
     res.status(400).json({ error });
   }

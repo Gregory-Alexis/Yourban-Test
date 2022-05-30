@@ -7,9 +7,13 @@ exports.findCommerceByActivity = (req, res) => {
 
   // Récupère la somme de tous les commerces d’un secteur d’activité donné
   try {
-    data = data.filter((data) => data.etablissement_type.toLowerCase() === id);
+    const newData = data.filter(
+      (data) => data.etablissement_type.toLowerCase() === id.toLowerCase()
+    );
 
-    res.status(200).json(data.length);
+    res
+      .status(200)
+      .json(`Il y a ${newData.length} établissement dans le secteur ${id}`);
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -20,9 +24,11 @@ exports.findCommerceByCity = (req, res) => {
 
   // Récupère la somme de tous les commerces d’une ville donnée
   try {
-    data = data.filter((data) => data.location.toLowerCase() === id);
+    const newData = data.filter(
+      (data) => data.location.toLowerCase() === id.toLowerCase()
+    );
     // le récupère le nombre de commerce dans une ville donnée
-    res.status(200).json(data.length);
+    res.status(200).json(`Il y a ${newData.length} commerces situé à ${id}`);
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -32,7 +38,7 @@ exports.findCommerceActivityInCity = (req, res) => {
   // Récupère la somme de tous les commerces d’un secteur d’activité dans une ville donnée
   const { sector, city } = req.params;
   try {
-    data = data
+    const newData = data
       .filter((data) => {
         if (
           data.etablissement_type.toLowerCase() === sector.toLowerCase() &&
@@ -43,7 +49,11 @@ exports.findCommerceActivityInCity = (req, res) => {
       })
       .map((data) => data);
 
-    res.status(200).json(data.length);
+    res
+      .status(200)
+      .json(
+        `A ${city} il y a ${newData.length} commerce dans le secteur d'activité ${sector}`
+      );
   } catch (error) {
     res.status(400).json({ error });
   }

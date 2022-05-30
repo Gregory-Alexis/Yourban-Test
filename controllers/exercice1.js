@@ -33,7 +33,7 @@ exports.findData = (req, res) => {
   Etant donné que le nom des établissements sont composé de plusieurs mots, pour faciliter la recherche (url), 
   j'ai supprimé les "espaces", ",Inc." et mis le tout en minuscule 
   */
-    data = data.find(
+    const newData = data.find(
       (data) =>
         data.etablissement
           .split(" ")
@@ -45,7 +45,7 @@ exports.findData = (req, res) => {
    Pour récupérer les éléments par leur id, j'aurai procédé comme ceci:
    const findData = data.find((data) => data.id === Number(id));
  */
-    res.status(200).json(data);
+    res.status(200).json(newData);
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -65,10 +65,10 @@ exports.deleteData = (req, res) => {
 // Mettre à jour une donnée
 exports.updateSingleData = (req, res) => {
   const { id } = req.params;
+  const { etablissement_type, etablissement, location, address, mail } =
+    req.body;
   try {
-    data = data.find((data) => data.id === Number(id));
-    const { etablissement_type, etablissement, location, address, mail } =
-      req.body;
+    const updateData = data.find((data) => data.id === Number(id));
 
     // J'utilise la méthode PATCH pour mettre à jour un élément en particulier
     if (etablissement_type) updateData.etablissement_type = etablissement_type;
@@ -77,7 +77,7 @@ exports.updateSingleData = (req, res) => {
     if (address) updateData.address = address;
     if (mail) updateData.mail = mail;
 
-    res.status(200).json({ message: "Donnée mise à jour" });
+    res.status(200).json({ message: "Donné mise à jour" });
   } catch (error) {
     res.status(400).json({ error });
   }
