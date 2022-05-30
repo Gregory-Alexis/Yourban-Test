@@ -9,10 +9,12 @@ const DeleteButton = ({ id, fetchData }) => {
 
   return (
     <Button
+      type="button"
+      aria-label="delete"
       colorScheme="teal"
+      borderBottom="2px solid black"
       mr={2}
       size="sm"
-      borderBottom="2px solid black"
       onClick={() => deleteHandler(id)}
     >
       Suprrimer
