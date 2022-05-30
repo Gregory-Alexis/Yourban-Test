@@ -2,7 +2,7 @@ const data = require("../MOCK_DATA.json");
 
 ///// Exercice 3
 
-exports.findEtablissementByCity = (req, res) => {
+exports.findByCity = (req, res) => {
   const { id } = req.params;
   // Récupère les donnée des établissement par ville
   try {
@@ -14,12 +14,12 @@ exports.findEtablissementByCity = (req, res) => {
       })
       .map((data) => data.etablissement);
     res.status(200).json(newData);
-  } catch (err) {
+  } catch (error) {
     res.status(400).json({ error });
   }
 };
 
-exports.findEtablissementBySectorAndCity = (req, res) => {
+exports.findBySectorAndCity = (req, res) => {
   // Récupère les donnée des établissement par secteur et ville
   const { sector, city } = req.params;
   try {
@@ -35,13 +35,14 @@ exports.findEtablissementBySectorAndCity = (req, res) => {
       .map((data) => data);
 
     res.status(200).json(newData);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+  } catch (error) {
+    res.status(400).json({ error });
   }
 };
 
-// Supression de tout les établissement d'une ville
-exports.deleteAllEtablissementInCity = (req, res) => {
+// Supression de tout les établissements d’une ville
+
+exports.deleteAllInCity = (req, res) => {
   const { id } = req.params;
   try {
     const deleteData = data.filter((data) => data.location !== id);
@@ -50,9 +51,8 @@ exports.deleteAllEtablissementInCity = (req, res) => {
     res.status(400).json({ error });
   }
 };
-
-// Supression de tout les établissement d'un secteur d'activité
-exports.deleteAllEtablissementPerType = (req, res) => {
+// Supression de tout les établissements d’un secteur d’activité
+exports.deleteAllPerType = (req, res) => {
   const { id } = req.params;
   try {
     const deleteData = data.filter((data) => data.etablissement_type !== id);
