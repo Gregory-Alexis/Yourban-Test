@@ -1,5 +1,5 @@
 let data = require("../MOCK_DATA.json");
-const { v4: uuidv4 } = require("uuid");
+
 ///// Exercice 1
 
 // Créer une nouvelle donnée
