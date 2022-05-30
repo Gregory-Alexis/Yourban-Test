@@ -1,11 +1,11 @@
 let data = require("../MOCK_DATA.json");
-
+const { v4: uuidv4 } = require("uuid");
 ///// Exercice 1
 
 // Créer une nouvelle donnée
 exports.createData = (req, res) => {
+  const createData = req.body;
   try {
-    const createData = req.body;
     data.push(createData);
     res.status(200).json({
       message: `Le nouvelle établissement ${createData.etablissement} a bien été créé`,
@@ -33,7 +33,7 @@ exports.findData = (req, res) => {
   Etant donné que le nom des établissements sont composé de plusieurs mots, pour faciliter la recherche (url), 
   j'ai supprimé les "espaces", ",Inc." et mis le tout en minuscule 
   */
-    const findData = data.find(
+    data = data.find(
       (data) =>
         data.etablissement
           .split(" ")
@@ -45,7 +45,7 @@ exports.findData = (req, res) => {
    Pour récupérer les éléments par leur id, j'aurai procédé comme ceci:
    const findData = data.find((data) => data.id === Number(id));
  */
-    res.status(200).json(findData);
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -55,8 +55,8 @@ exports.findData = (req, res) => {
 exports.deleteData = (req, res) => {
   const { id } = req.params;
   try {
-    const deleteData = data.filter((data) => data.id !== Number(id));
-    res.status(200).json(deleteData);
+    data = data.filter((data) => data.id !== Number(id));
+    res.status(200).json({ message: "Donnée supprimé" });
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -66,7 +66,7 @@ exports.deleteData = (req, res) => {
 exports.updateSingleData = (req, res) => {
   const { id } = req.params;
   try {
-    const updateData = data.find((data) => data.id === Number(id));
+    data = data.find((data) => data.id === Number(id));
     const { etablissement_type, etablissement, location, address, mail } =
       req.body;
 
@@ -77,7 +77,7 @@ exports.updateSingleData = (req, res) => {
     if (address) updateData.address = address;
     if (mail) updateData.mail = mail;
 
-    res.status(200).json(updateData);
+    res.status(200).json({ message: "Donnée mise à jour" });
   } catch (error) {
     res.status(400).json({ error });
   }
