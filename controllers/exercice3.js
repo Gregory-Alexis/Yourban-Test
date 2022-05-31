@@ -8,7 +8,7 @@ exports.findByCity = (req, res) => {
   try {
     const newData = data
       .filter((data) => {
-        if (data.location.toLocaleLowerCase() === city) {
+        if (data.location.toLowerCase() === city.toLowerCase()) {
           return data;
         }
       })
@@ -45,7 +45,9 @@ exports.findBySectorAndCity = (req, res) => {
 exports.deleteAllInCity = (req, res) => {
   const { city } = req.params;
   try {
-    data = data.filter((data) => data.location !== city);
+    data = data.filter(
+      (data) => data.location.toLowerCase() !== city.toLowerCase()
+    );
     res.status(200).json(data);
   } catch (error) {
     res.status(400).json({ error });
@@ -55,7 +57,9 @@ exports.deleteAllInCity = (req, res) => {
 exports.deleteAllPerType = (req, res) => {
   const { sector } = req.params;
   try {
-    data = data.filter((data) => data.etablissement_type !== sector);
+    data = data.filter(
+      (data) => data.etablissement_type.toLowerCase() !== sector.toLowerCase()
+    );
     res.status(200).json(data);
   } catch (error) {
     res.status(400).json({ error });
