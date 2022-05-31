@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex } from "@chakra-ui/react";
+import { Button, Center } from "@chakra-ui/react";
 import axios from "axios";
 
 const DeleteButton = ({ id, fetchData }) => {
