@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Box, Button, Center, Flex } from "@chakra-ui/react";
 import axios from "axios";
 
 const DeleteButton = ({ id, fetchData }) => {
@@ -8,17 +8,18 @@ const DeleteButton = ({ id, fetchData }) => {
   };
 
   return (
-    <Button
-      type="button"
-      aria-label="delete"
-      colorScheme="teal"
-      borderBottom="2px solid black"
-      mr={2}
-      size="sm"
-      onClick={() => deleteHandler(id)}
-    >
-      Suprrimer
-    </Button>
+    <Center>
+      <Button
+        type="button"
+        aria-label="delete"
+        colorScheme="blue"
+        borderBottom="2px solid black"
+        size="sm"
+        onClick={() => deleteHandler(id)}
+      >
+        Suprrimer
+      </Button>
+    </Center>
   );
 };
 
