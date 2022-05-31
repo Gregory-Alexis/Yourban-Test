@@ -14,7 +14,7 @@ exports.findCommerceByActivity = (req, res) => {
     res
       .status(200)
       .json(
-        `Il y a ${newData.length} établissement dans le secteur ${activity}`
+        `Il y a ${newData.length} établissement dans le secteur d'activité ${activity}`
       );
   } catch (error) {
     res.status(400).json({ error });
