@@ -45,8 +45,8 @@ exports.findBySectorAndCity = (req, res) => {
 exports.deleteAllInCity = (req, res) => {
   const { city } = req.params;
   try {
-    const newData = data.filter((data) => data.location !== city);
-    res.status(200).json(newData);
+    data = data.filter((data) => data.location !== city);
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -55,8 +55,8 @@ exports.deleteAllInCity = (req, res) => {
 exports.deleteAllPerType = (req, res) => {
   const { sector } = req.params;
   try {
-    const newData = data.filter((data) => data.etablissement_type !== sector);
-    res.status(200).json(newData);
+    data = data.filter((data) => data.etablissement_type !== sector);
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).json({ error });
   }
