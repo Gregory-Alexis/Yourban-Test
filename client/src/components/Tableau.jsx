@@ -38,6 +38,7 @@ const Tableau = ({ data, fetchData }) => {
           </Tr>
         </Thead>
         <Tbody>
+          {/* Pour écomiser de la ressource, j'ai limité la réception de donnée. */}
           {data.slice(0, 17).map((el) => (
             <Tr key={el.id}>
               <Td flex="1" borderRight="1px">
