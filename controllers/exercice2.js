@@ -3,32 +3,34 @@ let data = require("../MOCK_DATA.json");
 ///// Exercice 2
 
 exports.findCommerceByActivity = (req, res) => {
-  const { id } = req.params;
+  const { activity } = req.params;
 
   // Récupère la somme de tous les commerces d’un secteur d’activité donné
   try {
     const newData = data.filter(
-      (data) => data.etablissement_type.toLowerCase() === id.toLowerCase()
+      (data) => data.etablissement_type.toLowerCase() === activity.toLowerCase()
     );
 
     res
       .status(200)
-      .json(`Il y a ${newData.length} établissement dans le secteur ${id}`);
+      .json(
+        `Il y a ${newData.length} établissement dans le secteur ${activity}`
+      );
   } catch (error) {
     res.status(400).json({ error });
   }
 };
 
 exports.findCommerceByCity = (req, res) => {
-  const { id } = req.params;
+  const { city } = req.params;
 
   // Récupère la somme de tous les commerces d’une ville donnée
   try {
     const newData = data.filter(
-      (data) => data.location.toLowerCase() === id.toLowerCase()
+      (data) => data.location.toLowerCase() === city.toLowerCase()
     );
     // le récupère le nombre de commerce dans une ville donnée
-    res.status(200).json(`Il y a ${newData.length} commerces situé à ${id}`);
+    res.status(200).json(`Il y a ${newData.length} commerces situé à ${city}`);
   } catch (error) {
     res.status(400).json({ error });
   }

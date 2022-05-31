@@ -3,12 +3,12 @@ let data = require("../MOCK_DATA.json");
 ///// Exercice 3
 
 exports.findByCity = (req, res) => {
-  const { id } = req.params;
+  const { city } = req.params;
   // Récupère les donnée des établissement par ville
   try {
     const newData = data
       .filter((data) => {
-        if (data.location.toLocaleLowerCase() === id) {
+        if (data.location.toLocaleLowerCase() === city) {
           return data;
         }
       })
@@ -43,9 +43,9 @@ exports.findBySectorAndCity = (req, res) => {
 // Supression de tout les établissements d’une ville
 
 exports.deleteAllInCity = (req, res) => {
-  const { id } = req.params;
+  const { city } = req.params;
   try {
-    const newData = data.filter((data) => data.location !== id);
+    const newData = data.filter((data) => data.location !== city);
     res.status(200).json(newData);
   } catch (error) {
     res.status(400).json({ error });
@@ -53,9 +53,9 @@ exports.deleteAllInCity = (req, res) => {
 };
 // Supression de tout les établissements d’un secteur d’activité
 exports.deleteAllPerType = (req, res) => {
-  const { id } = req.params;
+  const { sector } = req.params;
   try {
-    const newData = data.filter((data) => data.etablissement_type !== id);
+    const newData = data.filter((data) => data.etablissement_type !== sector);
     res.status(200).json(newData);
   } catch (error) {
     res.status(400).json({ error });
