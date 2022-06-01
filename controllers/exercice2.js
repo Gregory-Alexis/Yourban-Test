@@ -17,7 +17,7 @@ exports.findCommerceByActivity = (req, res) => {
         `Il y a ${newData.length} établissement dans le secteur d'activité ${activity}`
       );
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -32,7 +32,7 @@ exports.findCommerceByCity = (req, res) => {
     // le récupère le nombre de commerce dans une ville donnée
     res.status(200).json(`Il y a ${newData.length} commerces situé à ${city}`);
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -57,6 +57,6 @@ exports.findCommerceActivityInCity = (req, res) => {
         `A ${city} il y a ${newData.length} commerce dans le secteur d'activité ${sector}`
       );
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json({ error: error.message });
   }
 };

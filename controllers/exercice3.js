@@ -15,7 +15,7 @@ exports.findByCity = (req, res) => {
       .map((data) => data.etablissement);
     res.status(200).json(newData);
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -36,7 +36,7 @@ exports.findBySectorAndCity = (req, res) => {
 
     res.status(200).json(newData);
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -48,20 +48,22 @@ exports.deleteAllInCity = (req, res) => {
     data = data.filter(
       (data) => data.location.toLowerCase() !== city.toLowerCase()
     );
+
     res.status(200).json(data);
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json({ error: error.message });
   }
 };
 // Supression de tout les établissements d’un secteur d’activité
 exports.deleteAllPerType = (req, res) => {
-  const { sector } = req.params;
   try {
+    const { sector } = req.params;
     data = data.filter(
       (data) => data.etablissement_type.toLowerCase() !== sector.toLowerCase()
     );
+
     res.status(200).json(data);
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json({ error: error.message });
   }
 };
